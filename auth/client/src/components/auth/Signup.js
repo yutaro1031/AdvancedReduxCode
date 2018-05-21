@@ -32,12 +32,19 @@ class Signup extends Component {
             autoComplete="none"
           />
         </fieldset>
+        {this.props.errorMessage}
         <button>Sign Up!</button>
       </form>
     );
   }
 }
 
-export default compose(connect(null, actions), reduxForm({ form: 'signup' }))(
-  Signup
-);
+function mapStateToProps(state) {
+  console.log(state);
+  return { errorMessage: state.errorMessage };
+}
+
+export default compose(
+  connect(mapStateToProps, actions),
+  reduxForm({ form: 'signup' })
+)(Signup);
